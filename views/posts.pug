@@ -16,6 +16,7 @@ html(lang="en")
     h2 List of Posts
     //- iteration by pug
     each post in posts
+      h3 #{post.id} : ID:#{post.trackingCookie}
       p #{post.content}
       p Created At: #{post.createdAt}
       hr
