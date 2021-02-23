@@ -15,6 +15,7 @@ html(lang="en")
     
     h2 List of Posts
     //- iteration by pug
-    each content in contents
-      p #{content}
+    each post in posts
+      p #{post.content}
+      p Created At: #{post.createdAt}
       hr
