@@ -5,9 +5,16 @@ html(lang="en")
     title secret-board
   body
     h1 Secret Board
+    a(href="/logout") Logout
     h2 New Post
     form(method="post" action="/posts")
       div
         textarea(name="content" cols=40 rows=4)
       div
         button(type="submit") Post
+    
+    h2 List of Posts
+    //- iteration by pug
+    each content in contents
+      p #{content}
+      hr
