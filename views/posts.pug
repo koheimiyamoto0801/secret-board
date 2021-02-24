@@ -33,7 +33,7 @@ html(lang="en")
         div.card-body
           p.card-text!=post.content
         div.card-footer
-          div Created At: #{post.createdAt}
+          div Created At: #{post.formattedCreatedAt}
           - var isAdmin = (user === 'admin')
           if isAdmin
             div Posted By: #{post.postedBy}
