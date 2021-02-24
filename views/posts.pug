@@ -21,7 +21,7 @@ html(lang="en")
         h3 #{post.id} : Admin 
       else
         h3 #{post.id} : ID:#{post.trackingCookie}
-      p #{post.content}
+      p!= post.content
       p Created At: #{post.createdAt}
       - var isAdmin = (user === 'admin')
       if isAdmin 
