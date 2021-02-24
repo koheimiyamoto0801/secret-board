@@ -2,34 +2,48 @@ doctype html
 html(lang="en")
   head
     meta(charset="UTF-8")
+    link(rel="stylesheet", 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm",
+    crossorigin="anonymous") 
+
     title secret-board
-  body
-    h1 Secret Board
-    a(href="/logout") Logout
+  body.container
+    div.my-2
+      a(href="/logout").btn.btn-info.float-right Logout
+      h1 Secret Board
     h2 New Post
     form(method="post" action="/posts")
       div
-        textarea(name="content" cols=40 rows=4)
+        textarea(name="content" cols=40 rows=4).form-control
       div
-        button(type="submit") Post
+        button(type="submit").btn.btn-primary Post
     
     h2 List of Posts
     //- iteration by pug
     each post in posts
-      - var isPostedByAdmin = (post.postedBy === 'admin')
-      if isPostedByAdmin
-        h3 #{post.id} : Admin 
-      else
-        h3 #{post.id} : ID:#{post.trackingCookie}
-      p!= post.content
-      p Created At: #{post.createdAt}
-      - var isAdmin = (user === 'admin')
-      if isAdmin 
-        p Posted by: #{post.postedBy}
-      - var isDeletable = (user === post.postedBy || isAdmin) 
-      //- JS in pug (user and posted user is same?, or admin)
-      if isDeletable
-        form(method="post" action="/posts?delete=1")
-          input(type="hidden" name="id" value=post.id)
-          button(type="submit") Delete
-      hr
+      div.card.my-3
+        div.card-header
+          - var isPostedByAdmin = (post.postedBy === 'admin')
+          //- JS in pug (user and posted user is same?, or admin)
+          if isPostedByAdmin
+            span #{post.id} : Admin
+          else
+            span #{post.id} : ID:#{post.trackingCookie}
+        div.card-body
+          p.card-text!=post.content
+        div.card-footer
+          div Created At: #{post.createdAt}
+          - var isAdmin = (user === 'admin')
+          if isAdmin
+            div Posted By: #{post.postedBy}
+          - var isDeletable = (user === post.postedBy || isAdmin)
+          if isDeletable
+            form(method="post" action="/posts?delete=1")
+              input(type="hidden" name="id" value=post.id)
+              button(type="submit").btn.btn-danger.float-right Delete
+  
+  script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js",
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl",
+    crossorigin="anonymous")
