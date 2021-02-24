@@ -19,4 +19,9 @@ html(lang="en")
       h3 #{post.id} : ID:#{post.trackingCookie}
       p #{post.content}
       p Created At: #{post.createdAt}
+      - var isDeletable = (user === post.postedBy) //- JS in pug (user and posted user is same?)
+      if isDeletable
+        form(method="post" action="/posts?delete=1")
+          input(type="hidden" name="id" value=post.id)
+          button(type="submit") Delete
       hr
