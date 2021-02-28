@@ -16,6 +16,7 @@ html(lang="en")
     form(method="post" action="/posts")
       div
         textarea(name="content" cols=40 rows=4).form-control
+        input(type="hidden" name="oneTimeToken" value=oneTimeToken)
       div
         button(type="submit").btn.btn-primary Post
     
@@ -42,6 +43,7 @@ html(lang="en")
           if isDeletable
             form(method="post" action="/posts?delete=1")
               input(type="hidden" name="id" value=post.id)
+              input(type="hidden" name="oneTimeToken" value=oneTimeToken)
               button(type="submit").btn.btn-danger.float-right Delete
   
   script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js")
